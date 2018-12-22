@@ -29,7 +29,7 @@ HorizontalWheelView是通过WheelView简单修改的，拥有WheelView相同功�
 
 ##### 设置: 
 
-
+```java
 	private List<String> wheelList;//滚轮的列表
 	private List<String> signInList;//签到的列表
 	private String currentText = "5";//初始化选中的文字
@@ -43,7 +43,7 @@ HorizontalWheelView是通过WheelView简单修改的，拥有WheelView相同功�
 	        wheelList.indexOf(currentText) , maxsize, minsize);
 	horizontalWheelView.setViewAdapter(wheelTextImageAdapter);
 	horizontalWheelView.setCurrentItem(wheelList.indexOf(currentText));
-
+```
 
       
 
