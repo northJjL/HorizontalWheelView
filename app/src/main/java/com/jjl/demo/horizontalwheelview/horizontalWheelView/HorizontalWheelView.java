@@ -53,13 +53,13 @@ import java.util.List;
  */
 public class HorizontalWheelView extends View {
 
-	/** Top and bottom shadows colors */
+	/** Left and right shadows colors */
 	private static final int[] SHADOWS_COLORS = new int[] { 0xaaffffff, 0x88ffffff, 0x33ffffff };
 
-	/** Top and bottom items offset (to hide that) */
+	/** Left and right items offset (to hide that) 测量(仅在wrap_content有效)*/
 	private static final int ITEM_OFFSET_PERCENT = 10;
 
-	/** Left and right padding value */
+	/** Top and Bottom padding value */
 	private static final int PADDING = 10;
 
 	/** Default count of visible items */
@@ -594,9 +594,9 @@ public class HorizontalWheelView extends View {
 	 *            the layout height
 	 */
 	private void layout(int width, int height) {
-		int itemsWidth = width - 2 * PADDING;
+		int itemsHeight = height - 2 * PADDING;
 
-		itemsLayout.layout(0, 0, itemsWidth, height);
+		itemsLayout.layout(0, 0, width, itemsHeight);
 	}
 
 	@Override

@@ -1,56 +1,52 @@
 package com.jjl.demo.horizontalwheelview;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jjl.demo.horizontalwheelview.horizontalWheelView.HorizontalWheelView;
-import com.jjl.demo.horizontalwheelview.horizontalWheelView.view.OnWheelChangedListener;
-import com.jjl.demo.horizontalwheelview.horizontalWheelView.view.OnWheelScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private HorizontalWheelView mHorizontalWheelView;
-    private WheelTexImageAdapter bankTextAdapter;
-    private List<String> datas;
-    private List<String> mList;
-    private String currentText = "5";
+    private HorizontalWheelView horizontalWheelView;
+    private WheelTexImageAdapter wheelTextImageAdapter;
+    private List<String> wheelList;//滚轮的列表
+    private List<String> signInList;//签到的列表
+    private String currentText = "5";//初始化选中的文字
     protected int maxsize = 26;// 最大的字体
     protected int minsize = 14;// 最小字体
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         initData();
-        mHorizontalWheelView = findViewById(R.id.select_personalinfo_wheelview);
-        mHorizontalWheelView.setVisibleItems(7);//显示的条目
-        mHorizontalWheelView.setCyclic(true);//是否循环
-        bankTextAdapter = new WheelTexImageAdapter(this , datas ,mList,
-                datas.indexOf(currentText) , maxsize, minsize);
-        mHorizontalWheelView.setViewAdapter(bankTextAdapter);
-        mHorizontalWheelView.setCurrentItem(datas.indexOf(currentText));
+        horizontalWheelView = findViewById(R.id.horizontalWheelView);
+        horizontalWheelView.setVisibleItems(7);//显示的条目
+        horizontalWheelView.setCyclic(true);//是否循环
+        wheelTextImageAdapter = new WheelTexImageAdapter(this , wheelList, signInList,
+                wheelList.indexOf(currentText) , maxsize, minsize);
+        horizontalWheelView.setViewAdapter(wheelTextImageAdapter);
+        //setCurrentItem有对Adapter为null的判断，所以必须在设置Adapter之后；
+        // 由于日期一定是包含当日的天数，所以这里不做-1的判断，animated 是否通过动画效果移动，默认为false
+        horizontalWheelView.setCurrentItem(wheelList.indexOf(currentText));
     }
 
 
     private void initData() {
-        datas = new ArrayList<>();
+        //calendar替换
+        wheelList = new ArrayList<>();
         for (int i = 1; i <31; i++) {
-            datas.add("" + i);
+            wheelList.add("" + i);
         }
-        mList = new ArrayList<>();
-        mList.add("5");
-        mList.add("11");
-        mList.add("15");
-        mList.add("22");
-        mList.add("2");
-        mList.add("29");
+        //签到天数
+        signInList = new ArrayList<>();
+        signInList.add("5");
+        signInList.add("11");
+        signInList.add("15");
+        signInList.add("22");
+        signInList.add("2");
+        signInList.add("29");
     }
 }

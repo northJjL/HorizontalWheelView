@@ -11,7 +11,7 @@
         android:gravity="center"
         >
         <com.jjl.demo.horizontalwheelview.horizontalWheelView.HorizontalWheelView
-            android:id="@+id/select_personalinfo_wheelview"
+            android:id="@+id/horizontalWheelView"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>

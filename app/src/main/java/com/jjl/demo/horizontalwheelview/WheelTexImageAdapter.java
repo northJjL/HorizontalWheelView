@@ -2,9 +2,7 @@ package com.jjl.demo.horizontalwheelview;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,38 +13,36 @@ import java.util.List;
 
 /**
  * 设置WheelTextAdapter
- *
- * @author weiyunchao
- *
  */
 public class WheelTexImageAdapter extends AbstractWheelTextImageAdapter {
 
-    List<String> datas;
-    List<String> signDayList;
+    List<String> wheelList;
+    List<String> signInList;
 
-    protected WheelTexImageAdapter(Context context, List<String> datas, List<String> signDayList,
+    protected WheelTexImageAdapter(Context context, List<String> wheelList, List<String> signInList,
                                    int currentItem, int maxsize, int minsize) {
         super(context, R.layout.item_day_sign_in, NO_RESOURCE, currentItem,
                 maxsize, minsize);
-        this.datas = datas;
-        this.signDayList = signDayList;
+        this.wheelList = wheelList;
+        this.signInList = signInList;
         setItemTextResource(R.id.dayNumber);
         setItemImageResource(R.id.signRight );
     }
 
     @Override
     public int getItemsCount() {
-        return datas.size();
+        return wheelList.size();
     }
 
     @Override
     protected CharSequence getItemText(int index) {
-        return datas.get(index);
+        return wheelList.get(index);
     }
 
     @Override
     protected void setupItem(int index, TextView textView, ImageView img) {
-        img.setVisibility(signDayList.contains(datas.get(index)) ? View.VISIBLE : View.GONE);
+        //getItem中的抽象函数，初始化操作
+        img.setVisibility(signInList.contains(wheelList.get(index)) ? View.VISIBLE : View.GONE);
         if (index == currentIndex) {
             textView.setTextSize(maxsize);
             textView.setTextColor(Color.BLACK);
@@ -60,11 +56,12 @@ public class WheelTexImageAdapter extends AbstractWheelTextImageAdapter {
 
     @Override
     public void onChange(HorizontalWheelView horizontalWheelView) {
+        //滚轮滑动的监听，目前添加了onChanged、onScrollingStarted、onScrollingFinished
         setupView(horizontalWheelView);
     }
 
     /**
-     * 修改List中View的显示
+     * 滚轮滚动时，修改显示的所有Item的状态
      */
     protected void setupView(HorizontalWheelView horizontalWheelView) {
         String currentText = (String)getItemText(horizontalWheelView .getCurrentItem());

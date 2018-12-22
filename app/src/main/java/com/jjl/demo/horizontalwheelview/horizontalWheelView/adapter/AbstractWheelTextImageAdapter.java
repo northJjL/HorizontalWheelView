@@ -330,6 +330,15 @@ public abstract class AbstractWheelTextImageAdapter extends AbstractWheelListene
 		return text;
 	}
 
+	/**
+	 * Loads a text view from view
+	 *
+	 * @param view
+	 *            the image view or layout containing it
+	 * @param textResource
+	 *            the text resource Id in layout
+	 * @return the loaded image view
+	 */
 	private ImageView getImageView(View view, int textResource) {
 		ImageView img = null;
 		try {
@@ -363,7 +372,5 @@ public abstract class AbstractWheelTextImageAdapter extends AbstractWheelListene
 				return inflater.inflate(resource, parent, false);
 		}
 	}
-
-
 }
 
